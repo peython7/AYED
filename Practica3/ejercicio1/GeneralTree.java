@@ -134,4 +134,35 @@ public class GeneralTree<T>{
 		}
 		return max;
 	}
+	public boolean esAncestro(T a,T b) {
+		GeneralTree<T> ancestro = buscarNodo(a,this);
+		boolean ok= true;
+		GeneralTree<T> descendiente = new GeneralTree<T>();
+		if(ancestro != null) {
+			descendiente = buscarNodo(b,ancestro);
+		}
+		if(descendiente == null) {
+			ok = false;
+		}
+		return ok;
+	}
+	
+	private GeneralTree<T> buscarNodo(T a, GeneralTree<T> arbol){
+		GeneralTree<T> aux= null;
+		if(arbol.getData() == a) {
+			return arbol;
+		}
+		else {
+			boolean ok = false;
+			Iterator<GeneralTree<T>> it = arbol.getChildren().iterator();
+			while(it.hasNext() && !ok) {
+				GeneralTree<T> c = it.next();
+				aux = buscarNodo(a,c);
+				if(aux != null && aux.getData()==a){
+					ok=true;
+				}
+			}
+		}
+		return aux;
+	}
 }
