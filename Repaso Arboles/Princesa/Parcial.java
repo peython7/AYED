@@ -29,18 +29,15 @@ public class Parcial {
 			return true;
 		}
 		if(a.hasChildren()) {
-			boolean ok= true;
 			List<GeneralTree<Personaje>> temp = new LinkedList<GeneralTree<Personaje>>();
 			List<GeneralTree<Personaje>> children = a.getChildren();
 			for(GeneralTree<Personaje> c: children) {
-				ok= buscarPrincesa(l,c); 
+				boolean ok= buscarPrincesa(l,c); 
 				if(ok) {
 					temp.add(a.getData());
 					temp.addAll(l);
-					l = temp;
-					return ok;
-				}else {
-					l.removeAll(l);
+                    			l.clear();
+                    			l.addAll(temp);
 					return ok;
 				}
 			}		
@@ -48,3 +45,4 @@ public class Parcial {
 		return false;
 	}
 }
+
